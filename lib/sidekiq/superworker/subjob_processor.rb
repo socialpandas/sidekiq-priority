@@ -2,8 +2,6 @@ module Sidekiq
   module Superworker
     class SubjobProcessor
       class << self
-        alias_method :original_sidekiq_item, :sidekiq_item
-
         def sidekiq_item(subjob, klass, jid)
           item = original_sidekiq_item(subjob, klass, jid)
 
@@ -16,6 +14,8 @@ module Sidekiq
           end
           item
         end
+        
+        alias_method :original_sidekiq_item, :sidekiq_item
       end
     end
   end
