@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.name          = 'sidekiq-priority'
   s.require_paths = ['lib']
   s.version       = Sidekiq::Priority::VERSION
+  s.license       = 'MIT'
 
   s.add_dependency 'sidekiq', '>= 2.1.0'  
 end
