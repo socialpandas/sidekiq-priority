@@ -29,9 +29,17 @@ You can also add jobs that should only run with lower priority than the default 
 MyWorker.perform_with_priority(:low, 42)
 ```
 
-### Custom Priorities
+Installation
+------------
 
-By default, two priorities are available: `:high` (above the default prioritization of perform_async) and `:low` (below the default prioritization), but you can add others (these values should be symbols, and `nil` represents the default prioritization):
+Include it in your Gemfile:
+
+    gem 'sidekiq-priority'
+
+Custom Priorities
+------------
+
+By default, two priorities are available: `:high` (above the default prioritization of perform_async) and `:low` (below the default prioritization of perform_async), but you can add others (these values should be symbols, and `nil` represents the default prioritization):
 
 ```ruby
 # config/initializers/sidekiq_priority.rb
