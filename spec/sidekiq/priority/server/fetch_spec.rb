@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'sidekiq/priority/server/fetch'
 
 describe Sidekiq::Priority::Server::Fetch do
   describe '#initialize' do
