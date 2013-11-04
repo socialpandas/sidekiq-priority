@@ -43,7 +43,7 @@ By default, two priorities are available: `:high` (above the default prioritizat
 
 ```ruby
 # config/initializers/sidekiq_priority.rb
-Sidekiq::Priorities.priorities = [:very_high, :high, nil, :low]
+Sidekiq::Priority.priorities = [:very_high, :high, nil, :low]
 ```
 
 License
