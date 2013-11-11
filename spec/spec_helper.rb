@@ -1,4 +1,12 @@
 require 'rspec/autorun'
+require 'simplecov'
+
+SimpleCov.start do
+  add_filter "vendor"
+  add_filter "spec"
+  add_filter "version"
+end
+
 require 'sidekiq-priority'
 
 RSpec.configure do |config|
@@ -15,5 +23,4 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
-
 end

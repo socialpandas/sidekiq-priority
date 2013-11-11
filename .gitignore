@@ -2,3 +2,5 @@
 .bundle/
 log/*.log
 pkg/
+coverage/
+*.swp
