@@ -12,9 +12,10 @@ Gem::Specification.new do |s|
   s.version       = Sidekiq::Priority::VERSION
   s.license       = 'MIT'
 
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "simplecov"
-  s.add_development_dependency "simplecov-rcov"
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'simplecov-rcov'
 
   s.add_dependency 'sidekiq', '>= 2.1.0'
 end
