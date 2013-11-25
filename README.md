@@ -9,7 +9,7 @@ Overview
 
 Sidekiq Priority lets you prioritize the jobs within any Sidekiq queue.
 
-For example, say you've added 5 jobs:
+For example, say you add 5 jobs with the default priority:
 
 ```ruby
 5.times.do
@@ -17,7 +17,7 @@ For example, say you've added 5 jobs:
 end
 ```
 
-Using Sidekiq Priority, you can add new jobs that have a higher priority by calling perform_with_priority instead of perform_async:
+Using Sidekiq Priority, you can add new jobs that have a higher priority than those original 5 jobs by calling perform_with_priority instead of perform_async:
 
 ```ruby
 MyWorker.perform_with_priority(:high, 42)
