@@ -2,6 +2,8 @@ Sidekiq Priority
 ================
 Prioritize Sidekiq jobs within queues
 
+[![Build Status](https://travis-ci.org/socialpandas/sidekiq-priority.png)](https://travis-ci.org/socialpandas/sidekiq-priority)
+
 Overview
 --------
 
