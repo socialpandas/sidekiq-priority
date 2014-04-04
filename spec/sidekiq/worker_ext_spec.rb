@@ -22,5 +22,26 @@ describe Sidekiq::Worker do
         'queue' => 'foo_high'
       }
     end
+
+    it 'sends an item to the default queue if priority is nil' do
+      TestWorker.stub(:client_push) { |item| item }
+      item = TestWorker.perform_with_priority(:invalid_priority, 1, 2)
+      item.should == {
+          'class' => TestWorker,
+          'args' => [1, 2],
+          'queue' => :foo
+      }
+    end
+
+    it 'sends an item to the default queue if a random priority is given' do
+      TestWorker.stub(:client_push) { |item| item }
+      item = TestWorker.perform_with_priority(:random_priority, 1, 2)
+      item.should == {
+          'class' => TestWorker,
+          'args' => [1, 2],
+          'queue' => :foo
+      }
+    end
+
   end
 end

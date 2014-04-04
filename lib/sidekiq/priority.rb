@@ -18,7 +18,7 @@ module Sidekiq
     end
 
     def self.queue_with_priority(queue, priority)
-      priority.nil? ? queue : "#{queue}_#{priority}"
+      priority && self.priorities.include?(priority) ? "#{queue}_#{priority}" : queue
     end
   end
 end
