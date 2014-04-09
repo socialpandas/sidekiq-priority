@@ -19,6 +19,18 @@ module Sidekiq
         end
       end
 
+      def self.prioritized_queues(base_queues)
+        queues = []
+        priorities = Sidekiq::Priority.priorities
+        priorities.each do |priority|
+          base_queues.each do |queue|
+            queues << Sidekiq::Priority.queue_with_priority(queue, priority)
+          end
+        end
+        queues
+      end
+
+
       def self.reliable_priority_fetch_class
         return Sidekiq::Priority::Server::ReliableFetch if defined?(Sidekiq::Priority::Server::ReliableFetch)
 
@@ -48,20 +60,15 @@ module Sidekiq
           protected
 
           def prioritized_queues(base_queues)
-            queues = []
-            priorities = Sidekiq::Priority.priorities
-            priorities.each do |priority|
-              base_queues.each do |queue|
-                queues << Sidekiq::Priority.queue_with_priority(queue, priority)
-              end
-            end
-            queues
+            Sidekiq::Priority::Server.prioritized_queues(base_queues)
           end
         end
         )
       end
 
       def self.basic_priority_fetch_class
+        return Sidekiq::Priority::Server::BasicFetch if defined?(Sidekiq::Priority::Server::BasicFetch)
+
         Sidekiq::Priority::Server.const_set('BasicFetch', Class.new(Sidekiq::BasicFetch) do
 
           def initialize(options)
@@ -74,14 +81,7 @@ module Sidekiq
           protected
 
           def prioritized_queues(base_queues)
-            queues = []
-            priorities = Sidekiq::Priority.priorities
-            priorities.each do |priority|
-              base_queues.each do |queue|
-                queues << Sidekiq::Priority.queue_with_priority(queue, priority)
-              end
-            end
-            queues
+            Sidekiq::Priority::Server.prioritized_queues(base_queues)
           end
         end
         )
