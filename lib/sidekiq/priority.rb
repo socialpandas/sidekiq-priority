@@ -18,12 +18,19 @@ module Sidekiq
     end
 
     def self.queue_with_priority(queue, priority)
-      priority.nil? ? queue : "#{queue}_#{priority}"
+      priority && self.priorities.include?(priority) ? "#{queue}_#{priority}" : queue
     end
   end
 end
 
-Sidekiq.configure_server do |config|
+if defined? Rails
+  class ConfigureServer < Rails::Railtie
+    config.after_initialize do
+      require "#{File.dirname(File.absolute_path(__FILE__))}/priority/server/fetch.rb"
+      Sidekiq::Priority::Server.configure_priority_fetch
+    end
+  end
+else
   require "#{directory}/priority/server/fetch.rb"
-  Sidekiq.options[:fetch] = Sidekiq::Priority::Server::Fetch
+  Sidekiq::Priority::Server.configure_priority_fetch
 end
