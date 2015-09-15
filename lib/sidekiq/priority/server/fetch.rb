@@ -6,7 +6,9 @@ module Sidekiq
     module Server
       class Fetch < Sidekiq::BasicFetch
         def initialize(options)
+          toreject = options[:reject] || []
           queues = prioritized_queues(options[:queues])
+          queues.reject! { |q| toreject.include?(q) }
           @strictly_ordered_queues = !!options[:strict]
           @queues = queues.map { |q| "queue:#{q}" }
           @unique_queues = @queues.uniq
