@@ -1,4 +1,3 @@
-require 'celluloid'
 require 'sidekiq/fetch'
 
 module Sidekiq
